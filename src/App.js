@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 
 import TaxiDescription from './components/taxiDescription';
+import TaxiMarker from './components/markers/taxiMarker';
 import PositionMarker from './components/markers/positionMarker';
 import SearchBar from './components/searchBar';
 
@@ -67,6 +68,14 @@ class App extends Component {
             <PositionMarker
               {...this.state.center}
             />
+
+            {this.state.taxis.map((taxi) => {
+              return <TaxiMarker
+                  key={taxi.id}
+                  {...taxi.rideSteps[this.state.rideStepIndex]}
+                  {...taxi}
+                />
+            })}
           </GoogleMapReact>
         </div>
       </div>

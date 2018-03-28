@@ -1,0 +1,14 @@
+.taxi .marker {
+  background-image: url("/assets/taxi.svg");
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+  margin-left: -25px;
+  margin-top: -25px;
+}
+
+.marker.selected {
+  background-color: lightyellow;
+  border-color: black;
+  font-weight: bold;
+}

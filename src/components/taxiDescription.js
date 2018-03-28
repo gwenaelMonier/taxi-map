@@ -48,7 +48,10 @@ class TaxiDescription extends React.Component {
         <div className="taxi-picture" style={style}></div>
         <div className="taxi-title">
           <span><b>{`${this.state.waitingDuration} d'attente (${this.state.waitingDistance})`}</b>{' - '}</span>
-          <span className="taxi-rating">{this.props.taxi.rating}<span className={'rating-' + roundedRating}></span></span>
+          <span className="taxi-rating">
+            {this.props.taxi.rating}
+            <span className={'rating-' + roundedRating}></span>
+          </span>
           <span>{' - ' + this.props.taxi.name}</span>
         </div>
       </div>);
