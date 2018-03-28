@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 
 import PositionMarker from './components/markers/positionMarker';
-
+import SearchBar from './components/searchBar';
 import './App.css';
 
 class App extends Component {
@@ -13,8 +13,13 @@ class App extends Component {
       center: {
         lat: 48.8586927,
         lng: 2.3473009
-      }
+      },
+      search: ""
     };
+  }
+
+  setAppState = (state) => {
+    this.setState(state)
   }
 
   render() {
@@ -22,6 +27,7 @@ class App extends Component {
       <div className="app">
         <div className="main">
           <div className="search">
+              <SearchBar setAppState={this.setAppState} />
           </div>
           <div className="taxi-descriptions">
           </div>
