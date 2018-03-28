@@ -1,0 +1,5 @@
+.marker.selected {
+  background-color: lightyellow;
+  border-color: black;
+  font-weight: bold;
+}
