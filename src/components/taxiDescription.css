@@ -1,0 +1,73 @@
+
+
+.taxi-description {
+  margin: 10px;
+  cursor: pointer;
+}
+
+.taxi-description:hover {
+  opacity: 0.9;
+}
+
+.taxi-picture {
+  height: 180px;
+  background-size: cover;
+}
+
+.taxi-title {
+  margin-top: 10px;
+}
+
+.taxi-title span {
+  vertical-align: middle;
+}
+
+.taxi-rating {
+  display: inline-block;
+}
+
+.rating-5, .rating-4, .rating-3, .rating-2, .rating-1 {
+  background-image: url("/assets/rating.svg");
+  height: 33px;
+  width: 155px;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+.rating-5 {
+  background-position: 0px -4px;
+}
+
+.rating-4 {
+  background-position: 0px -37px;
+}
+
+.rating-3 {
+  background-position: 0px -70px;
+}
+
+.rating-2 {
+  background-position: 0px -103px;
+}
+
+.rating-1 {
+  background-position: 0px -136px;
+}
+
+@media only screen and (max-width: 900px) {
+  .taxi-description {
+    flex-basis: calc(100% - 20px);
+  }
+}
+
+@media only screen and (min-width: 900px) and (max-width: 1600px) {
+  .taxi-description {
+    flex-basis: calc(50% - 20px);
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .taxi-description {
+    flex-basis: calc(33% - 20px);
+  }
+}

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 
+import TaxiDescription from './components/taxiDescription';
 import PositionMarker from './components/markers/positionMarker';
 import SearchBar from './components/searchBar';
+
 import './App.css';
 
 class App extends Component {
@@ -14,8 +16,24 @@ class App extends Component {
         lat: 48.8586927,
         lng: 2.3473009
       },
-      search: ""
+      search: "",
+      taxis: [],
+      rideStepIndex: 0
     };
+  }
+
+  componentDidMount() {
+    fetch("https://raw.githubusercontent.com/gwenaelMonier/mock-data/master/taxi-map/data/taxis.json")
+      .then(response => response.json())
+      .then((data) => {
+        this.setState({
+          taxis: data,
+        })
+      })
+
+    setInterval(() => {
+      this.setState({rideStepIndex: (this.state.rideStepIndex + 1) % 10})
+    }, 4000)
   }
 
   setAppState = (state) => {
@@ -30,6 +48,14 @@ class App extends Component {
               <SearchBar setAppState={this.setAppState} />
           </div>
           <div className="taxi-descriptions">
+            {this.state.taxis.map((taxi) => {
+              return <TaxiDescription
+                  key={taxi.id}
+                  taxi={taxi}
+                  taxiPosition={taxi.rideSteps[this.state.rideStepIndex]}
+                  userPosition={this.state.center}
+                />
+            })}
           </div>
         </div>
         <div className="map">
