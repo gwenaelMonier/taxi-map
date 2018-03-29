@@ -14,12 +14,12 @@ class TaxiDescription extends React.Component {
   }
 
   componentDidMount() {
-    this.getDistanceMatrix(this.props.userPosition, this.props.taxiPosition);
+    this.getDistanceMatrix(this.props.userPosition, this.props.taxi.position);
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.userPosition !== this.props.userPosition || prevProps.taxiPosition !== this.props.taxiPosition) {
-      this.getDistanceMatrix(this.props.userPosition, this.props.taxiPosition);
+    if (prevProps.userPosition !== this.props.userPosition || prevProps.taxi.position !== this.props.taxi.position) {
+      this.getDistanceMatrix(this.props.userPosition, this.props.taxi.position);
     }
   }
 
@@ -38,16 +38,21 @@ class TaxiDescription extends React.Component {
   }
 
   render() {
-    const style = {
+    const pictureStyle = {
       backgroundImage: `url('${this.props.taxi.imageUrl}')`
     };
     const roundedRating = Math.round(this.props.taxi.rating);
 
     return (
       <div className="taxi-description" onClick={this.handleClick}>
-        <div className="taxi-picture" style={style}></div>
+        <div className="taxi-picture" style={pictureStyle}></div>
         <div className="taxi-title">
-          <span><b>{`${this.state.waitingDuration} d'attente (${this.state.waitingDistance})`}</b>{' - '}</span>
+          {this.state.waitingDuration !== null && this.state.waitingDistance !== null &&
+            <span>
+              <b>{`${this.state.waitingDuration} wait (${this.state.waitingDistance})`}</b>
+              {' - '}
+            </span>
+          }
           <span className="taxi-rating">
             {this.props.taxi.rating}
             <span className={'rating-' + roundedRating}></span>

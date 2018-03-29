@@ -8,6 +8,8 @@ import SearchBar from './components/searchBar';
 
 import './App.css';
 
+const taxiApi = require('./api/mockedTaxiApi');
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -18,23 +20,27 @@ class App extends Component {
         lng: 2.3473009
       },
       search: "",
-      taxis: [],
-      rideStepIndex: 0
+      taxis: []
     };
   }
 
   componentDidMount() {
-    fetch("https://raw.githubusercontent.com/gwenaelMonier/mock-data/master/taxi-map/data/taxis.json")
-      .then(response => response.json())
+    this.refreshTaxis()
+
+    setInterval(() => {
+      this.refreshTaxis();
+    }, process.env.REACT_APP_DATA_REFRESHING_PERIOD)
+  }
+
+  refreshTaxis = () => {
+    taxiApi.getTaxis()
       .then((data) => {
+        data = data || [];
+
         this.setState({
           taxis: data,
         })
       })
-
-    setInterval(() => {
-      this.setState({rideStepIndex: (this.state.rideStepIndex + 1) % 10})
-    }, 4000)
   }
 
   setAppState = (state) => {
@@ -53,7 +59,6 @@ class App extends Component {
               return <TaxiDescription
                   key={taxi.id}
                   taxi={taxi}
-                  taxiPosition={taxi.rideSteps[this.state.rideStepIndex]}
                   userPosition={this.state.center}
                 />
             })}
@@ -72,7 +77,7 @@ class App extends Component {
             {this.state.taxis.map((taxi) => {
               return <TaxiMarker
                   key={taxi.id}
-                  {...taxi.rideSteps[this.state.rideStepIndex]}
+                  {...taxi.position}
                   {...taxi}
                 />
             })}
