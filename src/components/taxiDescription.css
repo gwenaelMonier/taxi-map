@@ -9,6 +9,10 @@
   opacity: 0.9;
 }
 
+.taxi-description.selected {
+  opacity: 0.7;
+}
+
 .taxi-picture {
   height: 180px;
   background-size: cover;

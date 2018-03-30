@@ -62,6 +62,8 @@ class TaxiDescriptions extends React.Component {
           key={taxi.id}
           taxi={taxi}
           waitingInfo={waitingInfo}
+          setAppState={this.props.setAppState}
+          selected={this.props.selectedTaxi === taxi.id}
         />
       })
     );

@@ -19,8 +19,13 @@ class App extends Component {
         lat: 48.8586927,
         lng: 2.3473009
       },
+      userPosition: {
+        lat: 48.8586927,
+        lng: 2.3473009
+      },
       search: "",
-      taxis: []
+      taxis: [],
+      selectedTaxi: null
     };
   }
 
@@ -58,6 +63,8 @@ class App extends Component {
             <TaxiDescriptions
               taxis={this.state.taxis}
               userPosition={this.state.center}
+              setAppState={this.setAppState}
+              selectedTaxi={this.state.selectedTaxi}
             />
           </div>
         </div>
@@ -68,7 +75,7 @@ class App extends Component {
             zoom={14}>
 
             <PositionMarker
-              {...this.state.center}
+              {...this.state.userPosition}
             />
 
             {this.state.taxis.map((taxi) => {
@@ -76,6 +83,7 @@ class App extends Component {
                   key={taxi.id}
                   {...taxi.position}
                   {...taxi}
+                  selected={this.state.selectedTaxi === taxi.id}
                 />
             })}
           </GoogleMapReact>

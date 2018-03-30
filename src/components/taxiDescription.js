@@ -3,14 +3,25 @@ import "./taxiDescription.css";
 
 class TaxiDescription extends React.Component {
 
+  handleClick = () => {
+    this.props.setAppState(
+      {
+        center: this.props.taxi.position,
+        selectedTaxi: this.props.taxi.id
+      }
+    );
+  }
+
   render() {
     const pictureStyle = {
       backgroundImage: `url('${this.props.taxi.imageUrl}')`
     };
+    const selected = this.props.selected ? "selected" : null;
+
     const roundedRating = Math.round(this.props.taxi.rating);
 
     return (
-      <div className="taxi-description" onClick={this.handleClick}>
+      <div className={`taxi-description ${selected}`} onClick={this.handleClick}>
         <div className="taxi-picture" style={pictureStyle}></div>
         <div className="taxi-title">
           {this.props.waitingInfo !== null &&
