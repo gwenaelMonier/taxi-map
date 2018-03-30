@@ -32,6 +32,10 @@ class SearchBar extends React.Component {
           center: {
             lat: geocode.lat,
             lng: geocode.lng
+          },
+          userPosition: {
+            lat: geocode.lat,
+            lng: geocode.lng
           }
         })
       });

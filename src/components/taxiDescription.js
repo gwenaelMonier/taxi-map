@@ -16,7 +16,7 @@ class TaxiDescription extends React.Component {
     const pictureStyle = {
       backgroundImage: `url('${this.props.taxi.imageUrl}')`
     };
-    const selected = this.props.selected ? "selected" : null;
+    const selected = this.props.selected ? 'selected' : '';
 
     const roundedRating = Math.round(this.props.taxi.rating);
 

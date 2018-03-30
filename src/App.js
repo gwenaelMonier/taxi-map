@@ -62,7 +62,7 @@ class App extends Component {
           <div className="taxi-descriptions">
             <TaxiDescriptions
               taxis={this.state.taxis}
-              userPosition={this.state.center}
+              userPosition={this.state.userPosition}
               setAppState={this.setAppState}
               selectedTaxi={this.state.selectedTaxi}
             />
