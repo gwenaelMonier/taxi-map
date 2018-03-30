@@ -12,7 +12,7 @@ function getTaxis() {
   return fetch(mockedDataURL)
     .then(response => response.json())
     .then(function (taxis) {
-      var rideStepIndex = getRideStepIndex();
+      const rideStepIndex = getRideStepIndex();
 
       taxis.map(function (taxi) {
         // Mock position

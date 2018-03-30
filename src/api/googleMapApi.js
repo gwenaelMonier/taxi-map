@@ -2,7 +2,9 @@
 const google = window.google;
 
 function handleError (error) {
+  console.warn("Fail to call google map api:");
   console.warn(error);
+
   return null;
 }
 
@@ -25,19 +27,12 @@ function getGeocode(address) {
   }).catch(handleError);
 }
 
-function getDistanceMatrix(origin, destination) {
+function getDistanceMatrix(origins, destination) {
   const service = new google.maps.DistanceMatrixService();
 
-  const googleMapOrigin = origin.lat + ',' + origin.lng;
-  const googleMapDestination = destination.lat + ',' + destination.lng;
-
   const params = {
-    origins: [
-      googleMapOrigin
-    ],
-    destinations: [
-      googleMapDestination
-    ],
+    origins: origins,
+    destinations: [destination],
     travelMode: google.maps.TravelMode.DRIVING
   };
 
@@ -50,10 +45,9 @@ function getDistanceMatrix(origin, destination) {
       }
     });
   }).then(function (data) {
-    if (data.rows[0].elements[0].status === google.maps.DistanceMatrixStatus.OK) {
-      return data.rows[0].elements[0];
-    }
-    return null;
+    return data.rows.map(function (row) {
+      return row.elements[0];
+    });
   }).catch(handleError);
 }
 

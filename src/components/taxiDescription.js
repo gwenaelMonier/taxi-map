@@ -1,41 +1,7 @@
 import React from "react";
 import "./taxiDescription.css";
 
-const googleMapApi = require('../api/googleMapApi');
-
 class TaxiDescription extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      waitingDuration: null,
-      waitingDistance: null,
-    };
-  }
-
-  componentDidMount() {
-    this.getDistanceMatrix(this.props.userPosition, this.props.taxi.position);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.userPosition !== this.props.userPosition || prevProps.taxi.position !== this.props.taxi.position) {
-      this.getDistanceMatrix(this.props.userPosition, this.props.taxi.position);
-    }
-  }
-
-  getDistanceMatrix = function (origin, destination) {
-    googleMapApi.getDistanceMatrix(origin, destination)
-      .then((information) => {
-        if (information === null) {
-          return
-        }
-
-        this.setState({
-          waitingDuration: information.duration.text,
-          waitingDistance: information.distance.text,
-        })
-      });
-  }
 
   render() {
     const pictureStyle = {
@@ -47,9 +13,9 @@ class TaxiDescription extends React.Component {
       <div className="taxi-description" onClick={this.handleClick}>
         <div className="taxi-picture" style={pictureStyle}></div>
         <div className="taxi-title">
-          {this.state.waitingDuration !== null && this.state.waitingDistance !== null &&
+          {this.props.waitingInfo !== null &&
             <span>
-              <b>{`${this.state.waitingDuration} wait (${this.state.waitingDistance})`}</b>
+              <b>{`Waiting ${this.props.waitingInfo.duration.text} (${this.props.waitingInfo.distance.text})`}</b>
               {' - '}
             </span>
           }

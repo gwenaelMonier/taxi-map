@@ -1,23 +1,24 @@
 # Taxi map
 
-This app is a clone of uber made with react. Live demo with mocked data [Here](https://github.com/facebookincubator/create-react-app).
+This app is a Uber clone made with react. Live demo with mocked data [Here](https://github.com/facebookincubator/create-react-app).
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-## Command
-### Update packages
+## Commands
+
+**Update packages**
 
 ```sh
 yarn
 ```
 
-### Start app in dev mode
+**Start app in dev mode**
 
 ```sh
 yarn start
 ```
 
-### Build production app
+**Build production app**
 
 ```sh
 yarn build

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 
-import TaxiDescription from './components/taxiDescription';
+import TaxiDescriptions from './components/taxiDescriptions';
 import TaxiMarker from './components/markers/taxiMarker';
 import PositionMarker from './components/markers/positionMarker';
 import SearchBar from './components/searchBar';
@@ -55,13 +55,10 @@ class App extends Component {
               <SearchBar setAppState={this.setAppState} />
           </div>
           <div className="taxi-descriptions">
-            {this.state.taxis.map((taxi) => {
-              return <TaxiDescription
-                  key={taxi.id}
-                  taxi={taxi}
-                  userPosition={this.state.center}
-                />
-            })}
+            <TaxiDescriptions
+              taxis={this.state.taxis}
+              userPosition={this.state.center}
+            />
           </div>
         </div>
         <div className="map">
