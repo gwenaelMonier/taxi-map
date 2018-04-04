@@ -5,10 +5,15 @@ import TaxiDescriptions from './components/taxiDescriptions';
 import TaxiMarker from './components/markers/taxiMarker';
 import PositionMarker from './components/markers/positionMarker';
 import SearchBar from './components/searchBar';
+import SortSelect from './components/sortSelect';
+import FilterSelect from './components/filterSelect';
 
 import './App.css';
 
-const taxiApi = require('./api/mockedTaxiApi');
+const taxiSortService = require('./domain/taxi/sortService');
+const taxiFilterService = require('./domain/taxi/filterService');
+const taxiApi = require('./domain/taxi/mockedApi');
+const debouncer = require('./helpers/debouncer');
 
 class App extends Component {
   constructor(props) {
@@ -23,10 +28,13 @@ class App extends Component {
         lat: 48.8586927,
         lng: 2.3473009
       },
-      search: "",
+      selectedSortType: taxiSortService.type.RANDOM,
+      selectedFilterType: taxiFilterService.type.ALL,
       taxis: [],
       selectedTaxi: null
     };
+
+    this.debouncedRefreshTaxis = debouncer.debounce(this.refreshTaxis, 500);
   }
 
   componentDidMount() {
@@ -37,11 +45,17 @@ class App extends Component {
     }, process.env.REACT_APP_DATA_REFRESHING_PERIOD)
   }
 
-  refreshTaxis = () => {
-    taxiApi.getTaxis()
-      .then((data) => {
-        data = data || [];
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.selectedSortType !== this.state.selectedSortType
+      || prevState.selectedFilterType !== this.state.selectedFilterType)
+    {
+      this.debouncedRefreshTaxis();
+    }
+  }
 
+  refreshTaxis = () => {
+    taxiApi.getTaxis(this.state.userPosition, this.state.selectedSortType, this.state.selectedFilterType)
+      .then((data) => {
         this.setState({
           taxis: data,
         })
@@ -58,6 +72,16 @@ class App extends Component {
         <div className="main">
           <div className="search">
               <SearchBar setAppState={this.setAppState} />
+          </div>
+          <div className="dropdowns">
+              <SortSelect
+                setAppState={this.setAppState}
+                selectedSortType={this.state.selectedSortType}
+              />
+              <FilterSelect
+                setAppState={this.setAppState}
+                selectedFilterType={this.state.selectedFilterType}
+              />
           </div>
           <div className="taxi-descriptions">
             <TaxiDescriptions
@@ -83,6 +107,7 @@ class App extends Component {
                   key={taxi.id}
                   {...taxi.position}
                   {...taxi}
+                  setAppState={this.setAppState}
                   selected={this.state.selectedTaxi === taxi.id}
                 />
             })}

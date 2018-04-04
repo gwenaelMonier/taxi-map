@@ -10,7 +10,13 @@
 
 .search {
   padding: 10px;
-  margin-right: 20px;
+}
+
+.dropdowns {
+  padding-left: 10px;
+  margin-right: 0.9em;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .taxi-descriptions {
@@ -24,4 +30,35 @@
   height: 100vh;
   top: 0;
   position: sticky;
+}
+
+@media only screen and (max-width: 900px) {
+  .main {
+    flex-basis: 35%;
+  }
+
+  .search {
+    margin-right: 0.8em;
+  }
+}
+
+@media only screen and (min-width: 900px) and (max-width: 1600px) {
+  .main {
+    flex-basis: 40%;
+  }
+  .search {
+    margin-right: 0.9em;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .main {
+    flex-basis: 50%;
+  }
+  .search {
+    margin-right: 1.2em;
+  }
+  .dropdowns {
+    justify-content: space-between;
+  }
 }

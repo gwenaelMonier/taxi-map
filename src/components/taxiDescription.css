@@ -14,7 +14,6 @@
 }
 
 .taxi-picture {
-  height: 180px;
   background-size: cover;
 }
 
@@ -32,46 +31,75 @@
 
 .rating-5, .rating-4, .rating-3, .rating-2, .rating-1 {
   background-image: url("/assets/rating.svg");
-  height: 33px;
-  width: 155px;
   background-repeat: no-repeat;
   display: inline-block;
+  background-size: 100%;
 }
 
 .rating-5 {
-  background-position: 0px -4px;
+  background-position: 0px 3.5%;
 }
 
 .rating-4 {
-  background-position: 0px -37px;
+  background-position: 0px 29%;
 }
 
 .rating-3 {
-  background-position: 0px -70px;
+  background-position: 0px 54%;
 }
 
 .rating-2 {
-  background-position: 0px -103px;
+  background-position: 0px 79%;
 }
 
 .rating-1 {
-  background-position: 0px -136px;
+  background-position: 0px 104%;
 }
 
 @media only screen and (max-width: 900px) {
   .taxi-description {
+    font-size: 0.7em;
     flex-basis: calc(100% - 20px);
+  }
+
+  .taxi-picture {
+    height: 140px;
+  }
+
+  .rating-5, .rating-4, .rating-3, .rating-2, .rating-1 {
+    height: 17px;
+    width: 78px;
   }
 }
 
 @media only screen and (min-width: 900px) and (max-width: 1600px) {
   .taxi-description {
+    font-size: 0.9em;
     flex-basis: calc(50% - 20px);
+  }
+
+  .taxi-picture {
+    height: 140px;
+  }
+
+  .rating-5, .rating-4, .rating-3, .rating-2, .rating-1 {
+    height: 22px;
+    width: 103px;
   }
 }
 
 @media only screen and (min-width: 1600px) {
   .taxi-description {
+    font-size: 1em;
     flex-basis: calc(33% - 20px);
+  }
+
+  .taxi-picture {
+    height: 180px;
+  }
+
+  .rating-5, .rating-4, .rating-3, .rating-2, .rating-1 {
+    height: 33px;
+    width: 155px;
   }
 }
