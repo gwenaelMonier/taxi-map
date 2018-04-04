@@ -1,11 +1,8 @@
 
 const google = window.google;
 
-function handleError (error) {
-  console.warn("Fail to call google map api:");
-  console.warn(error);
-
-  return null;
+function logError (error) {
+  console.warn("Fail to call google map api: ", error);
 }
 
 function getGeocode(address) {
@@ -24,10 +21,17 @@ function getGeocode(address) {
       lat: results[0].geometry.location.lat(),
       lng: results[0].geometry.location.lng(),
     };
-  }).catch(handleError);
+  }).catch(function (error) {
+    logError(error);
+    return null;
+  });
 }
 
 function getDistanceMatrix(origins, destination) {
+  if (origins == null || origins.length === 0 || destination == null) {
+    return Promise.reject(new Error('Invalid params given to distance matrix service'));
+  }
+
   const service = new google.maps.DistanceMatrixService();
 
   const params = {
@@ -48,7 +52,10 @@ function getDistanceMatrix(origins, destination) {
     return data.rows.map(function (row) {
       return row.elements[0];
     });
-  }).catch(handleError);
+  }).catch(function (error) {
+    logError(error);
+    return [];
+  });
 }
 
 module.exports = {
