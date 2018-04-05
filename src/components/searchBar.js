@@ -12,10 +12,20 @@ class SearchBar extends React.Component {
       search: ""
     };
 
-    this.handleSearch = debouncer.debounceEventHandler(this.handleSearch, 1500);
+    this.executeSearch = debouncer.debounceEventHandler(this.executeSearch, 1500);
   }
 
   handleSearch = (event) => {
+    const searchText = event.target.value;
+
+    this.setState({
+      search: searchText
+    });
+
+    this.executeSearch(event);
+  }
+
+  executeSearch = (event) => {
     const searchText = event.target.value;
 
     googleMapApi.getGeocode(searchText)
@@ -39,10 +49,20 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <input className="search-bar"
-        type="text"
-        placeholder="Place of takeover (address, metro station, district, ...)"
-        onChange={this.handleSearch} />
+      <div>
+        <input className="search-bar large"
+          type="text"
+          value={this.state.search}
+          placeholder="Place of takeover (address, metro station, district, ...)"
+          onChange={this.handleSearch}
+        />
+        <input className="search-bar small"
+          type="text"
+          value={this.state.search}
+          placeholder="Place of takeover"
+          onChange={this.handleSearch}
+        />
+      </div>
     );
   }
 }

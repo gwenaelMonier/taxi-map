@@ -7,6 +7,7 @@ import PositionMarker from './components/markers/positionMarker';
 import SearchBar from './components/searchBar';
 import SortSelect from './components/sortSelect';
 import FilterSelect from './components/filterSelect';
+import ResultsInfos from './components/resultsInfos';
 
 import './App.css';
 
@@ -47,7 +48,8 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.selectedSortType !== this.state.selectedSortType
-      || prevState.selectedFilterType !== this.state.selectedFilterType)
+      || prevState.selectedFilterType !== this.state.selectedFilterType
+      || prevState.userPosition !== this.state.userPosition)
     {
       this.debouncedRefreshTaxis();
     }
@@ -70,18 +72,25 @@ class App extends Component {
     return (
       <div className="app">
         <div className="main">
-          <div className="search">
-              <SearchBar setAppState={this.setAppState} />
+          <div className="search-header">
+            <div className="search">
+                <SearchBar setAppState={this.setAppState} />
+            </div>
+            <div className="dropdowns">
+                <SortSelect
+                  setAppState={this.setAppState}
+                  selectedSortType={this.state.selectedSortType}
+                />
+                <FilterSelect
+                  setAppState={this.setAppState}
+                  selectedFilterType={this.state.selectedFilterType}
+                />
+            </div>
           </div>
-          <div className="dropdowns">
-              <SortSelect
-                setAppState={this.setAppState}
-                selectedSortType={this.state.selectedSortType}
-              />
-              <FilterSelect
-                setAppState={this.setAppState}
-                selectedFilterType={this.state.selectedFilterType}
-              />
+          <div className="results-info">
+            <ResultsInfos
+              taxis={this.state.taxis}
+            />
           </div>
           <div className="taxi-descriptions">
             <TaxiDescriptions

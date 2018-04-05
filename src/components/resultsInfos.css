@@ -1,0 +1,21 @@
+.results-size {
+  margin: 0px 10px 10px 10px;
+}
+
+@media only screen and (max-width: 650px) {
+  .results-size {
+    font-size: 0.7em;
+  }
+}
+
+@media only screen and (min-width: 650px) and (max-width: 1600px) {
+  .results-size {
+    font-size: 0.9em;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .results-size {
+    font-size: 1em;
+  }
+}

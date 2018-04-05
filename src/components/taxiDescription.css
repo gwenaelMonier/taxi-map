@@ -10,7 +10,7 @@
 }
 
 .taxi-description.selected {
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .taxi-picture {
@@ -30,6 +30,8 @@
 }
 
 .rating-5, .rating-4, .rating-3, .rating-2, .rating-1 {
+  height: 33px;
+  width: 155px;
   background-image: url("/assets/rating.svg");
   background-repeat: no-repeat;
   display: inline-block;
@@ -37,15 +39,15 @@
 }
 
 .rating-5 {
-  background-position: 0px 3.5%;
+  background-position: 0px 2%;
 }
 
 .rating-4 {
-  background-position: 0px 29%;
+  background-position: 0px 28%;
 }
 
 .rating-3 {
-  background-position: 0px 54%;
+  background-position: 0px 53.5%;
 }
 
 .rating-2 {
@@ -56,7 +58,23 @@
   background-position: 0px 104%;
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 650px) {
+  .taxi-description {
+    font-size: 0.7em;
+    flex-basis: calc(100% - 20px);
+  }
+
+  .taxi-picture {
+    height: 100px;
+  }
+
+  .rating-5, .rating-4, .rating-3, .rating-2, .rating-1 {
+    height: 11px;
+    width: 52px;
+  }
+}
+
+@media only screen and (min-width: 650px) and (max-width: 900px) {
   .taxi-description {
     font-size: 0.7em;
     flex-basis: calc(100% - 20px);
@@ -67,8 +85,8 @@
   }
 
   .rating-5, .rating-4, .rating-3, .rating-2, .rating-1 {
-    height: 17px;
-    width: 78px;
+    height: 14px;
+    width: 65px;
   }
 }
 
@@ -83,8 +101,8 @@
   }
 
   .rating-5, .rating-4, .rating-3, .rating-2, .rating-1 {
-    height: 22px;
-    width: 103px;
+    height: 17px;
+    width: 78px;
   }
 }
 
@@ -99,7 +117,7 @@
   }
 
   .rating-5, .rating-4, .rating-3, .rating-2, .rating-1 {
-    height: 33px;
-    width: 155px;
+    height: 21px;
+    width: 97px;
   }
 }
